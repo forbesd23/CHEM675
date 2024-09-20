@@ -1,0 +1,33 @@
+\ProvidesPackage{myconfig} % 声明这个文件是一个 LaTeX 宏包
+\RequirePackage{amsmath, amsthm, amssymb, bm, color,enumitem,extarrows,fancyhdr,float, framed,geometry, graphicx, hyperref, ,mathfont,mathrsfs} % 导入所需的宏包
+
+\geometry{margin=2.54cm, xetex}
+\linespread{1.5}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{Problem \arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{problem+}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{*Problem \arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{Solution. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{Note. }}{\par}
+
+\renewcommand{\(}{\left ( }
+\renewcommand{\)}{\right ) }
+\renewcommand{\[}{\left [ }
+\renewcommand{\]}{\right ] }
+\newcommand{\la}{\left \langle }
+\newcommand{\ra}{\right \rangle }
+\newcommand{\lno}{\left | }
+\newcommand{\rno}{\right | }
+\renewcommand{\d}{\mathrm{d}}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\e}{\mathrm{e}}
+
+\graphicspath{{./figures/}}
+
+\renewcommand{\labelenumi}{\alph{enumi}.}

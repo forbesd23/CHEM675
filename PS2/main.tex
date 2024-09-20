@@ -1,0 +1,172 @@
+\documentclass[12pt, a4paper, hidelinks]{article}
+\usepackage{myconfig}
+
+\title{\textbf{Problem Set 2}}
+\author{Lin Han}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+Let the initial wavefunction be defined by
+\begin{align*}
+    \psi \(x, t = 0\) = \frac{1}{\sqrt{2}} \(\phi_1 \(x\) - \phi_3 \(x\)\)
+\end{align*}
+where $\phi_i \(x\)$ is the $i^{\text{th}}$ lowest-energy eigenstate of the particle in a box.
+\begin{enumerate}[label=(\alph*)]
+    \item Give the analytic expression for the probability density.
+    \item Give the analytic expression for the expected evolution of the probability density.
+    \item Explain how the expected evolution of the probability density relates to the expected 
+    result for a nonstationary state.
+    \item Give the analytic expression for the average position as a function of time.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+        \begin{align*}
+            \rho\(x\)&=\lno \Psi\(x,t=0\)\rno^2\\
+            &=\frac{1}{2} \(\lno \phi_1\(x\)\rno^2+\lno \phi_3\(x\)\rno^2 
+            -2\rm{Re}\(\phi_1^{\ast}\(x\)\phi_3\(x\)\)\)\\
+            &=\frac{1}{l}\(\sin^2\(\frac{\pi x}{l}\)+\sin^2\(\frac{3\pi x}{l}\)-2
+            \sin\(\frac{\pi x}{l}\)\sin\(\frac{3\pi x}{l}\)\)
+        \end{align*}
+        \item Given the initial wavefunction, we have:
+        \begin{align*}
+            \Phi\(x,t\)=\frac{1}{2}\(\phi_1\(x\)\e ^{-iE_1t/\hbar}-\phi_3\(x\)\e ^{-iE_3t/\hbar}\)
+        \end{align*}
+        then:
+        \begin{align*}
+            \rho\(x,t\)&=\lno \Psi\(x,t\)\rno^2\\
+            &=\frac{1}{l}\(\sin^2\(\frac{\pi x}{l}\)+\sin^2\(\frac{3\pi x}{l}\)-\rm{Re}\(2
+            \sin\(\frac{\pi x}{l}\)\sin\(\frac{3\pi x}{l}\)\e^{\frac{i}{\hbar}\(E_1-E_3\)t}\)\)\\
+            &=\frac{1}{l}\(\sin^2\(\frac{\pi x}{l}\)+\sin^2\(\frac{3\pi x}{l}\)-2
+            \sin\(\frac{\pi x}{l}\)\sin\(\frac{3\pi x}{l}\)\cos\(\frac{\(E_1-E_3\)}{\hbar}t\)\)
+        \end{align*}
+        where the evolution is:
+        \begin{align*}
+            \frac{\d \rho\(x,t\)}{\d t}=\frac{2}{l}\cdot\frac{E_1-E_3}{\hbar}
+            \sin\(\frac{\pi x}{l}\)\sin\(\frac{3\pi x}{l}\)\sin\(\frac{\(E_1-E_3\)}{\hbar}t\)
+        \end{align*}
+        \item The system is in its nonstationary state, which means it can be expressed as superposition 
+        of stationary states. The expected evolution of the probability density is related to the 
+        interference of the stationary states, and is not 0.
+        \item 
+        \begin{align*}
+            \la x\ra&=\int_{0}^{l}\d x\ x\rho\(x,t\)\\
+            &=\frac{l}{2}
+        \end{align*}
+        which means superposition does not affect the average position.
+    \end{enumerate}
+\end{solution}
+\begin{problem}
+    Let the initial wavefunction be defined as the Gaussian wavepacket
+    \begin{align*}
+        \Psi\(x,t=0\)=N\e^{-a^2\(x-L/2\)^2/2}
+    \end{align*}
+    where $N$ is the normalization coefficient, $L=5$\AA, and $a=4$\AA$^{-1}$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Determine analytically whether $\Psi\(x,t=0\)$ is a stationary state for a particle-in-a-box 
+        potential.
+        \item Using the accompanying Jupyter notebook:
+        \begin{enumerate}[label=\roman*.]
+            \item Explain what the function $f\(N\)=\sum_{i=1}^{N}c_i^{\ast}c_i$ represents.
+            \item Plot $f\(N\)$ for the given expansion coefficients $c_i$.
+            \item Calculate $\lim_{N\to \infty}f\(N\)$.
+            \item Explain what $f\(N\)$ says about the number of expansion terms required to accurately 
+            simulate the wavefunction..
+            \item Plot $\lno\Psi\(x,t\)\rno^2$ at several choices of $t$ to show how the wavefunction changes in time.
+            \item Explain what $\lno\Psi\(x,t\)\rno^2$ tells us about the motion os a particle in a box.
+            \item Plot $\la x\(t\)\ra$ and $\la\(x-L/2\)^2\(t\)\ra$.
+            \item Explain the significance of $\la x\(t\)\ra$ and $\la\(x-L/2\)^2\(t\)\ra$ and their 
+            relationships to $\lno\Psi\(x,t\)\rno^2$.
+        \end{enumerate}
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+        From normalization, we have:
+        \begin{align*}
+            N=\(\frac{a^2}{\pi}\)^{1/4}
+        \end{align*}
+        For an in-box particle at $t=0$, the wavefunction could be expressed as:
+        \begin{align*}
+            \Psi\(x,t=0\)=\sum_{i}a_i\phi_i\(x\)
+        \end{align*}
+        To determine whether $\Psi\(x,t=0\)$ is a stationary state, we need to check whether it is a superposition 
+        of eigenstates. Solve for $c_i$, we get:
+        \begin{align*}
+            c_i&=\int_{0}^{l}\d x \ \Psi\(x,t=0\)\cdot\sqrt{\frac{2}{l}}\sin\(\frac{i\pi x}{l}\)\\
+            &=\int_{-\infty}^{\infty}\d x \ \Psi\(x,t=0\)\cdot\sqrt{\frac{2}{l}}\sin\(\frac{i\pi x}{l}\)\\
+            &=2\frac{\pi^{1/4}}{\sqrt{la}}\sin\(\frac{i\pi}{2}\)\e ^{-\frac{i^2\pi^2}{2a^2 l^2}}
+        \end{align*}
+        when i is odd, $a_i$ is not zero, which means $\Psi\(x,t=0\)$ is not a stationary state.
+        \item 
+        \begin{enumerate}[label=\roman*.]
+            \item If we expand the wavefunction with particle-in-box eigenstates, it can be written as:
+            \begin{align*}
+                \Psi\(x,t=0\)=\sum_{i}c_i\phi_i\(x\)
+            \end{align*}
+            For normalization, we have:
+            \begin{align*}
+                \sum_{i=1}^{\infty}\lno c_i\rno^2=1
+            \end{align*}
+            which means $\lno c_i\rno^2$ is the probability of the particle in the $i^{\text{th}}$ eigenstate.
+            So $f\(N\)=\sum_{i}^{N}\lno c_i\rno^2$ is the probability of the particle in the first eigenstate to the $N^{\text{th}}$
+            eigenstate.
+            \item We can plot $f\(N\)$ as:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{fig1}
+                \caption{Plot of $f\(N\)$}
+                \label{fig1}
+            \end{figure}
+            \item When $N\to \infty$, we can use intergral to calculate the limit:
+            \begin{align*}
+                \lim_{N\to \infty}f\(N\)&=\int_{0}^{\infty}\d i\ \lno c_i\rno^2\\
+                &=\int_{0}^{\infty}\d i\ 4\(\frac{\pi}{l^2 a^2}\)^{1/2}\sin^2\(\frac{i\pi}{2}\)\e ^{-\frac{i^2\pi^2}{a^2l^2}}\\
+                &=1-\e^{-\frac{a^2l^2}{4}}
+            \end{align*}
+            assume that $al\gg 1$, we have:
+            \begin{align*}
+                \lim_{N\to \infty}f\(N\)\approx 1
+            \end{align*}
+            \item From the plot in Fig.\ref{fig1}, we can see that when the number of extension terms is small, 
+            especially when $N< 20$, $f\(N\)< 0.8$, which means there's only 80\% probability of the particle
+            in the first 20 eigenstates. So to accurately simulate the wavefunction, we need to include more expansion terms. 
+            One great idea tis to connect the suitable number of expansion terms with $la$, which means to better fit 
+            the wavefunction, we should make $\frac{N}{al}\gg 1$.
+            \item Plots are as follows:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{fig2}
+                \caption{Plot of $\lno\Psi\(x,t\)\rno^2$}
+                \label{fig2}
+            \end{figure}
+            \item Because the wavefunction is not a stationary state, the probability density will change in time. Due to the superposition,
+            the density will form a peridic structure.
+            \item Plots are as follows:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{fig3}
+                \caption{Plot of $\la x\(t\)\ra$}
+                \label{fig3}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{fig4}
+                \caption{Plot of $\la\(x-L/2\)^2\(t\)\ra$}
+                \label{fig4}
+            \end{figure}
+            \item From these plots, we can see that $\la x\(t\)\ra$ is constant with $t$, which means 
+            all of the eigenstates are centered at the same position, i.e., the middle of the box. And 
+            superposition does not affect the average position. $\la\(x-L/2\)^2\(t\)\ra$ arises from 0 
+            to a constant value, which means that superposition affects the density of the particle, but 
+            with enough time, the density will become uniform statistically, which makes $\la\(x-L/2\)^2\(t\)\ra$ 
+            a constant and same value as when the density is uniform.
+        \end{enumerate}
+\end{enumerate}
+\end{solution}
+\end{document}
